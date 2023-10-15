@@ -22,6 +22,12 @@ def generate():
     elif argv[1] == 'diagonal':
         first_class = [(0, 0.5), (0.5, 0)]
         second_class = [(1, 0.5), (0.5, 1)]
+    elif argv[1] == 'spiral':
+        first_class = [(0.1 * i * np.cos(i), 0.1 * i * np.sin(i)) for i in np.arange(0, 2 * np.pi, 0.1)]
+        second_class = [(0.1 * i * np.cos(i) + 1, 0.1 * i * np.sin(i) + 1) for i in np.arange(0, 2 * np.pi, 0.1)]
+    elif argv[1] == 'linear':
+        first_class = [(0, 0), (1, 1)]
+        second_class = [(0, 1), (1, 0)]
     data = pd.DataFrame(first_class + second_class, columns=['x', 'y'])
     data['classification'] = [True] * len(first_class) + [False] * len(second_class)
     data.to_csv("data.csv", index=False)
